@@ -25,10 +25,14 @@ like Gnome and KDE.
 The first click on the menu brings up a list of interfaces that can be used with
 nmcli. Clicking on an element in this menu will bring the interface down or up.
 
+![Screenshot of the Interface Menu](https://raw.githubusercontent.com/cmotc/awesome-network-manager/master/nm1.png)
+
 ###Wi-Fi Menu
 Highlighting the Wi-Fi device in the interface list will bring up a list of
 wireless AP's nearby. Clicking on an item in the list will attempt to connect to
 the interface. Currently only works for Open AP's.
+
+![Screenshot of the Wifi Menu](https://raw.githubusercontent.com/cmotc/awesome-network-manager/master/nm1.png)
 
 Installation
 ------------
