@@ -43,6 +43,7 @@ echo etc/xdg/awesome/rc.lua.pech.example etc/xdg/awesome >> debian/install
 echo etc/xdg/awesome/$SOURCEBIN etc/xdg/awesome/$SOURCEDIR >> debian/install
 echo usr/bin/$IFACEBIN usr/bin >> debian/install
 echo usr/bin/$CONNBIN usr/bin >> debian/install
+cp $SOURCEDOC usr/share/doc/$DEBFOLDER/$SOURCEDOC
 echo usr/share/doc/$DEBFOLDER/$SOURCEDOC usr/share/doc/$DEBFOLDER >> debian/install
 
 echo "Source: $DEBFOLDER
