@@ -32,7 +32,7 @@ Highlighting the Wi-Fi device in the interface list will bring up a list of
 wireless AP's nearby. Clicking on an item in the list will attempt to connect to
 the interface. Currently only works for Open AP's.
 
-![Screenshot of the Wifi Menu](https://raw.githubusercontent.com/cmotc/awesome-network-manager/master/nm1.png)
+![Screenshot of the Wifi Menu](https://raw.githubusercontent.com/cmotc/awesome-network-manager/master/nm2.png)
 
 Installation
 ------------
