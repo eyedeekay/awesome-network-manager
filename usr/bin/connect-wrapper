@@ -1,0 +1,43 @@
+#! /bin/sh
+network="$1"
+password="$2"
+if [ $network == "" ]; then
+   exit
+fi
+if [ -e $HOME/.wifi_passwords ]; then
+    if [ "$password" != "" ]; then
+        if [grep -Fxq "$password" $HOME/.wifi_passwords]; then
+            echo "network=$network;password=$password" >> $HOME/.wifi_passwords
+        fi
+    fi
+    export $(grep $network $HOME/.wifi_passwords)
+elif [ -e $HOME/.wifi_passwords.gpg ]; then
+    . $HOME/.wifigpg
+# Decrypt password details here
+    gpg --output $HOME/.wifi_passwords --decrypt $HOME/.wifi_passwords.gpg
+    if [ "$password" != "" ]; then
+        if [grep -Fxq "$password" $HOME/.wifi_passwords]; then
+            echo "network=$network;password=$password" >> $HOME/.wifi_passwords
+        fi
+    fi
+    export $(grep $network $HOME/.wifi_passwords)
+# Re-Encrypt password details here
+    gpg --encrypt --recipient $VERY_PRIVATE_KEY_WIFI $HOME/.wifi_passwords --output $HOME/.wifi_passwords
+    srm -z $HOME/.wifi_passwords
+else
+    touch $HOME/.wifi_passwords
+    if [ $password != "" ]; then
+        if [grep -Fxq "$password" $HOME/.wifi_passwords]; then
+            echo "network=$network;password=$password" >> $HOME/.wifi_passwords
+        fi
+    fi
+    export $(grep $network $HOME/.wifi_passwords)
+fi
+
+if [ $password == "" ]; then
+    nmcli device wifi connect $network
+else
+    nmcli device wifi connect $network password $password
+fi
+
+exit

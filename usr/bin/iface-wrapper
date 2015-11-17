@@ -1,0 +1,8 @@
+#! /bin/sh
+iface=$1
+iface_status=$(cat /sys/class/net/$iface/operstate)
+if [ "$iface_status" == "up" ]; then
+    sudo ifconfig $iface down
+else
+    sudo ifconfig $iface up
+fi
