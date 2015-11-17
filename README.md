@@ -34,10 +34,10 @@ Installation
 ------------
 
 I'm trying to keep my Awesome plugins as simple as possible. First, copy the 
-svirfneblin/network/ folder into your awesome config folder. If you were in the
+awesome/network/ folder into your awesome config folder. If you were in the
 root of this repository, you could manually copy the file like this:  
 
-        cd /etc/xdg/svrifneblin/ && cp -Rv network ~/.config/awesome/
+        cd etc/xdg/awesome/ && cp -Rv network ~/.config/awesome/
 
 Once it's copied, just require the library at the top of your rc.lua, like so:  
 
