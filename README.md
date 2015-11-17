@@ -43,6 +43,10 @@ root of this repository, you could manually copy the file like this:
 
         cd etc/xdg/awesome/ && cp -Rv network ~/.config/awesome/
 
+and the wrapper scripts like this:
+
+        cd usr/bin/ && sudo cp -v *-wrapper /usr/bin/ && sudo chmod a+x /usr/bin/*-wrapper
+
 Once it's copied, just require the library at the top of your rc.lua, like so:  
 
         require("network.pech")
