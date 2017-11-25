@@ -30,3 +30,24 @@ check:
 	 usr/bin/password-wrapper \
 	 usr/bin/password-encrypt
 
+install-home:
+	mkdir -p $(HOME)/.config/awesome/network
+	cp etc/xdg/awesome/network/pech.lua $(HOME)/.config/awesome/network
+
+deb:
+	checkinstall -y \
+		--nodoc \
+		--install=no \
+		--pkgname=awesome-network-manager \
+		--pkgsource=awesome-network-manager \
+		--pkgversion=1 \
+		--pkglicense=gpl \
+		--pkggroup=x11 \
+		--maintainer=problemsolver@openmailbox.org \
+		--pakdir=.. \
+		--requires="wicd-cli | nmcli, awesome" \
+		--deldoc=yes \
+		--deldesc=yes \
+		--delspec=yes \
+		--backup=no
+	rm -f description-pak
