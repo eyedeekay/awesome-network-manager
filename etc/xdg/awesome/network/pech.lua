@@ -12,8 +12,8 @@ local table = require("table")
 -- These are essentially constants, but they contain the commands the shell
 -- needs to run to manage all the network interfaces. Also, I need to buy
 -- a couple extra batteries for this thing once I get libreboot ported.
-local COMMAND_LIST_IFACE_STATES = "nmcli device"
-local COMMAND_LIST_WIFIS = "nmcli device wifi"
+local COMMAND_LIST_IFACE_STATES = "iface-list"
+local COMMAND_LIST_WIFIS = "wireless-list"
 local COMMAND_WIFI_CONNECT = "connect-wrapper"
 --local COMMAND_WIFI_CONNECT = "nmcli device wifi connect"
 local COMMAND_CHECK_WIFILIST_EXISTS = ""

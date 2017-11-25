@@ -1,43 +1,28 @@
-#! /bin/sh
-network="$1"
-password="$2"
-if [ $network == "" ]; then
-   exit
-fi
-if [ -e $HOME/.wifi_passwords ]; then
-    if [ "$password" != "" ]; then
-        if [grep -Fxq "$password" $HOME/.wifi_passwords]; then
-            echo "network=$network;password=$password" >> $HOME/.wifi_passwords
+#! /usr/bin/env sh
+if [ "$(which nmcli)" ]; then
+        export network="$1"
+        export password="$2"
+        password-wrapper "$network" "$password"
+        export "$(grep $network $HOME/.config/.wifi_passwords)"
+        password-encrypt
+        if [ -z "$password" ]; then
+            nmcli device wifi connect "$network"
+        else
+            nmcli device wifi connect "$network" password "$password"
         fi
-    fi
-    export $(grep $network $HOME/.wifi_passwords)
-elif [ -e $HOME/.wifi_passwords.gpg ]; then
-    . $HOME/.wifigpg
-# Decrypt password details here
-    gpg --output $HOME/.wifi_passwords --decrypt $HOME/.wifi_passwords.gpg
-    if [ "$password" != "" ]; then
-        if [grep -Fxq "$password" $HOME/.wifi_passwords]; then
-            echo "network=$network;password=$password" >> $HOME/.wifi_passwords
+elif [ "$(which wicd-cli)" ]; then
+        export network="$1"
+        export password="$2"
+        password-wrapper "$network" "$password"
+        export "$(grep $network $HOME/.config/.wifi_passwords)"
+        password-encrypt
+        if [ -z "$password" ]; then
+            wicd-cli --wireless --connect -n "$network"
+        else
+            wicd-cli --wireless --connect -n "$network" --network-property key "$password"
         fi
-    fi
-    export $(grep $network $HOME/.wifi_passwords)
-# Re-Encrypt password details here
-    gpg --encrypt --recipient $VERY_PRIVATE_KEY_WIFI $HOME/.wifi_passwords --output $HOME/.wifi_passwords
-    srm -z $HOME/.wifi_passwords
 else
-    touch $HOME/.wifi_passwords
-    if [ $password != "" ]; then
-        if [grep -Fxq "$password" $HOME/.wifi_passwords]; then
-            echo "network=$network;password=$password" >> $HOME/.wifi_passwords
-        fi
-    fi
-    export $(grep $network $HOME/.wifi_passwords)
-fi
-
-if [ $password == "" ]; then
-    nmcli device wifi connect $network
-else
-    nmcli device wifi connect $network password $password
+        echo "neither nmcli nor wicd-cli were found"
 fi
 
 exit
