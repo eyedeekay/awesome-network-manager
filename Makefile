@@ -43,7 +43,7 @@ deb:
 		--pkgversion=1 \
 		--pkglicense=gpl \
 		--pkggroup=x11 \
-		--maintainer=problemsolver@openmailbox.org \
+		--maintainer=eyedeekay@safe-mail.net \
 		--pakdir=.. \
 		--requires="wicd-cli | nmcli, awesome" \
 		--deldoc=yes \

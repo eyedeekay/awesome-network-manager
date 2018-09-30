@@ -20,7 +20,9 @@ local COMMAND_CHECK_WIFILIST_EXISTS = ""
 local COMMAND_CAT_GPG_CIPHERTEXT = ""
 local COMMAND_DECIPHER_GPG_NETPASSWDS = ""
 
-module("netmgr")
+--module("netmgr")
+
+local netmgr = {}
 
 terminal = "x-terminal-emulator"
 
@@ -45,7 +47,7 @@ function arrayfy_by_newline(input)
     local sep = "\n"
     local t = {};
     for str in string.gmatch(input, "([^"..sep.."]+)") do
-        if string.match(str,"\*") then
+        if string.match(str,"*") then
         else
         table.insert(t, str)
         end
@@ -124,3 +126,4 @@ function generate_network_menu()
     return networks
 end
 
+return netmgr
