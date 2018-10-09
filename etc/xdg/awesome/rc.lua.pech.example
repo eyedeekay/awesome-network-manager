@@ -122,12 +122,18 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- create a network menu widget
 function mynetworkmenu()
-    networkmenu = awful.menu({	items = netmgr.generate_network_menu()	  })
+    networkmenu = awful.menu({	items = generate_network_menu()	  })
     return networkmenu
 end
+mynetworklauncher = awful.widget.launcher({ image = beautiful.network_icon, menu = awful.menu({ items = { { "s" , "s" }, { "s" , "s" }, } }) })
+function updatenetworkmenu()
+	mynetworklauncher = awful.widget.launcher({ image = beautiful.network_icon,
+												menu = mynetworkmenu()})
+	return mynetworklauncher
+end
+--updatenetworkmenu()
+vicious.register(mynetworklauncher, awful.widget.launcher, updatenetworkmenu(), 30 )
 
-mynetworklauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                            menu = mynetworkmenu()})
 nettimer = timer({ timeout = 360 })
 nettimer:connect_signal("timeout", function()
         mynetworklauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
