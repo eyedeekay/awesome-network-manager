@@ -7,6 +7,7 @@ the area.
 
 To-Do:
 ------
+   * **This is about to undergo a number of major, obvious revisions to make it easier to use and more versatile. Pardon the dust.**
    * Show all interfaces as menu items(Done)
    * Show wifi interfaces as submenu items(Done)
    * Optionally notify the user of new networks periodically(Done)
@@ -37,9 +38,9 @@ the interface. Currently only works for Open AP's.
 Installation
 ------------
 
-I'm trying to keep my Awesome plugins as simple as possible. First, copy the 
+I'm trying to keep my Awesome plugins as simple as possible. First, copy the
 awesome/network/ folder into your awesome config folder. If you were in the
-root of this repository, you could manually copy the file like this:  
+root of this repository, you could manually copy the file like this:
 
         cd etc/xdg/awesome/ && cp -Rv network ~/.config/awesome/
 
@@ -47,26 +48,32 @@ and the wrapper scripts like this:
 
         cd usr/bin/ && sudo cp -v *-wrapper /usr/bin/ && sudo chmod a+x /usr/bin/*-wrapper
 
-Once it's copied, just require the library at the top of your rc.lua, like so:  
+Once it's copied, just require the library at the top of your rc.lua, like so:
 
         require("network.pech")
 
-instantiate the menu:  
+instantiate the menu:
 
         -- create a network menu widget
         function mynetworkmenu()
-            networkmenu = awful.menu({	items = netmgr.generate_network_menu()	  })
+            networkmenu = awful.menu({	items = generate_network_menu()	  })
             return networkmenu
         end
-        mynetworklauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                            menu = mynetworkmenu()})
+        mynetworklauncher = awful.widget.launcher({ image = beautiful.network_icon, menu = awful.menu({ items = { { "s" , "s" }, { "s" , "s" }, } }) })
+        function updatenetworkmenu()
+            mynetworklauncher = awful.widget.launcher({ image = beautiful.network_icon,
+                                                        menu = mynetworkmenu()})
+            return mynetworklauncher
+        end
+        --updatenetworkmenu()
+        vicious.register(mynetworklauncher, awful.widget.launcher, updatenetworkmenu(), 30 )
 
-and add your widget to your wibox:  
+and add your widget to your wibox:
 
         right_layout:add(mynetworklauncher)
 
 if you want to periodically scan for new access points, you can add these lines
-to your rc.lua to create a timer:  
+to your rc.lua to create a timer:
 
         nettimer = timer({ timeout = 360 })
         nettimer:connect_signal("timeout", function()
