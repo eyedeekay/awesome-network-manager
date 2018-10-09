@@ -8,6 +8,7 @@ install:
 	install usr/bin/wireless-list /usr/local/bin
 	install usr/bin/password-wrapper /usr/local/bin
 	install usr/bin/password-encrypt /usr/local/bin
+	install usr/bin/wicd-nmcli /usr/local/bin
 	mkdir -p /etc/xdg/awesome/network/
 	install etc/xdg/awesome/network/netmgr.lua /etc/xdg/awesome/network/
 

@@ -3,7 +3,7 @@
 if [ "$(which nmcli)" ]; then
         nmcli device
 elif [ "$(which wicd-cli)" ]; then
-        ip link show
+        wicd-nmcli device
 else
         echo "neither nmcli nor wicd-cli were found"
 fi

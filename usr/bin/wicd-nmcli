@@ -1,0 +1,38 @@
+#! /usr/bin/env sh
+
+if [ "$1" = "device" ]; then
+    pre=$(ip link show | sed 's|[0-9]: ||' | tr -d ':')
+    status=$(wicd-cli --wireless --network-details | \
+        grep 'Essid:' | \
+        sed 's|Essid:||g')
+    wlan=$(echo "$pre" | \
+        grep 'wlan' | \
+        sed 's| <.*>| wifi|g' | \
+        sed 's|mtu .* qdisc noqueue state ||g' | \
+        sed 's|UP|connected|g' | sed 's|DOWN|disconnected|g' | \
+        sed 's| mode .*||g' | sed 's|\s|\t|g')
+    eth=$(echo "$pre" | \
+        grep 'eth0' | \
+        sed 's| <.*>| ether|g' | \
+        sed 's|mtu .* state ||g' | \
+        sed 's|UP|connected|g' | sed 's|DOWN|disconnected|g' | \
+        sed 's| mode .*||g' | sed 's|\s|\t|g')
+    echo "DEVICE TYPE STATE CONNECTION" | sed 's|\s|\t|g'
+    echo "$wlan$status"
+    echo "$eth"
+    veth=$(echo "$pre" | grep UP | grep -v LOOPBACK | grep -v eth0 | grep -v wlan | grep veth | \
+        sed 's|.*@if|veth|g' | sed 's| <.*>| vether|g' | \
+        sed 's|mtu .* state ||g' | \
+        sed 's|UP|connected|g' | sed 's|DOWN|disconnected|g' | \
+        sed 's| mode .*||g' | sed 's|\s|\t|g')
+    echo "$veth"
+    bridge=$(echo "$pre" | grep UP | grep -v LOOPBACK | grep -v eth0 | grep -v wlan | grep -v veth | \
+        sed 's|br-.*<|bridge <|g' | \
+        sed 's| <.*>| bridge|g' | \
+        sed 's|mtu .* state ||g' | \
+        sed 's|UP|connected|g' | sed 's|DOWN|disconnected|g' | \
+        sed 's| mode .*||g' | sed 's|\s|\t|g')
+    echo "$bridge"
+else
+    exit 1
+fi
