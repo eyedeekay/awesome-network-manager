@@ -1,7 +1,7 @@
 #! /usr/bin/env sh
 
 if [ "$(which nmcli)" ]; then
-        nmcli device wireless
+        nmcli device wifi
 elif [ "$(which wicd-cli)" ]; then
         wicd-cli --wireless --scan --list-networks
 else

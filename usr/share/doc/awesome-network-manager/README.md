@@ -41,7 +41,7 @@ root of this repository, you could manually copy the file like this:
 
 Once it's copied, just require the library at the top of your rc.lua, like so:  
 
-        require("network.pech")
+        require("network.netmgr")
 
 instantiate the menu:  
 

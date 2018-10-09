@@ -8,6 +8,8 @@ the area.
 To-Do:
 ------
    * **This is about to undergo a number of major, obvious revisions to make it easier to use and more versatile. Pardon the dust.**
+     - The old version is the old file, at the old location network/pech.lua
+     - Updates will be made in network/netmgr.lua
    * Show all interfaces as menu items(Done)
    * Show wifi interfaces as submenu items(Done)
    * Optionally notify the user of new networks periodically(Done)
@@ -50,7 +52,7 @@ and the wrapper scripts like this:
 
 Once it's copied, just require the library at the top of your rc.lua, like so:
 
-        require("network.pech")
+        require("network.netmgr")
 
 instantiate the menu:
 

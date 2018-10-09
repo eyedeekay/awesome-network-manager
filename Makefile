@@ -9,7 +9,7 @@ install:
 	install usr/bin/password-wrapper /usr/local/bin
 	install usr/bin/password-encrypt /usr/local/bin
 	mkdir -p /etc/xdg/awesome/network/
-	install etc/xdg/awesome/network/pech.lua /etc/xdg/awesome/network/
+	install etc/xdg/awesome/network/netmgr.lua /etc/xdg/awesome/network/
 
 remove:
 	rm -rfv /usr/bin/connect-wrapper \
@@ -20,7 +20,7 @@ remove:
 	 /usr/local/bin/iface-wrapper \
 	 /usr/local/bin/iface-list \
 	 /usr/local/bin/wireless-list \
-	 /etc/xdg/awesome/network/pech.lua
+	 /etc/xdg/awesome/network/netmgr.lua
 
 check:
 	shellcheck usr/bin/connect-wrapper \
@@ -32,7 +32,7 @@ check:
 
 install-home:
 	mkdir -p $(HOME)/.config/awesome/network
-	cp etc/xdg/awesome/network/pech.lua $(HOME)/.config/awesome/network
+	cp etc/xdg/awesome/network/netmgr.lua $(HOME)/.config/awesome/network
 
 deb:
 	checkinstall -y \

@@ -13,7 +13,7 @@ local calladuran = require("calladuran")
 local naughty = require("naughty")
 local menubar = require("menubar")
 -- NetworkManager library
-require("network.pech")
+require("network.netmgr")
 -- Load Debian menu entries
 require("debian.menu")
 
