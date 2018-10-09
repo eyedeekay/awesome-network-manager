@@ -22,13 +22,13 @@ This widget is designed to mimic be similar to the pop-up/drop-down mouse driven
 Wi-Fi management interfaces that are popular in heavier desktop environments
 like Gnome and KDE.
 
-###Interface Menu
+### Interface Menu
 The first click on the menu brings up a list of interfaces that can be used with
 nmcli. Clicking on an element in this menu will bring the interface down or up.
 
 ![Screenshot of the Interface Menu](https://raw.githubusercontent.com/cmotc/awesome-network-manager/master/nm1.png)
 
-###Wi-Fi Menu
+### Wi-Fi Menu
 Highlighting the Wi-Fi device in the interface list will bring up a list of
 wireless AP's nearby. Clicking on an item in the list will attempt to connect to
 the interface. Currently only works for Open AP's.
